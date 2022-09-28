@@ -1,0 +1,97 @@
+[
+{
+"name": "United States",
+"dial_code": "+1",
+"code": "US"
+},
+{
+"name": "China",
+"dial_code": "+86",
+"code": "CN"
+},
+{
+"name": "Japan",
+"dial_code": "+81",
+"code": "JP"
+},
+{
+"name": "Germany",
+"dial_code": "+49",
+"code": "DE"
+},
+{
+"name": "United Kingdom",
+"dial_code": "+44",
+"code": "GB"
+},
+{
+"name": "India",
+"dial_code": "+91",
+"code": "IN"
+},
+{
+"name": "France",
+"dial_code": "+33",
+"code": "FR"
+},
+{
+"name": "Italy",
+"dial_code": "+39",
+"code": "IT"
+},
+{
+"name": "Korea, Republic of South Korea",
+"dial_code": "+82",
+"code": "KR"
+},
+{
+"name": "Russia",
+"dial_code": "+7",
+"code": "RU"
+},
+{
+"name": "Australia",
+"dial_code": "+61",
+"code": "AU"
+},
+{
+"name": "Brazil",
+"dial_code": "+55",
+"code": "BR"
+},
+{
+"name": "Iran, Islamic Republic",
+"dial_code": "+98",
+"code": "IR"
+},
+{
+"name": "Spain",
+"dial_code": "+34",
+"code": "ES"
+},
+{
+"name": "Mexico",
+"dial_code": "+52",
+"code": "MX"
+},
+{
+"name": "Netherlands",
+"dial_code": "+31",
+"code": "NL"
+},
+{
+"name": "Saudi Arabia",
+"dial_code": "+966",
+"code": "SA"
+},
+{
+"name": "Switzerland",
+"dial_code": "+41",
+"code": "CH"
+},
+{
+"name": "Turkey",
+"dial_code": "+90",
+"code": "TR"
+}
+]

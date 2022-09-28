@@ -9,6 +9,7 @@ export default StyleSheet.create({
     title: {
         fontSize: 28,
         color: 'orange',
+        maxWidth: '80%',
     },
     subTitle: {
         fontSize: 16,
@@ -16,7 +17,7 @@ export default StyleSheet.create({
     image: {
         width: Dimensions.get('screen').width / 2,
         height: Dimensions.get('screen').width / 2,
-        borderRadius: 5,
+        borderRadius: Dimensions.get('screen').width / 4,
         opacity: 0.8,
     },
     continueBtn: {
