@@ -10,6 +10,8 @@ export default StyleSheet.create({
         fontSize: 28,
         color: 'orange',
         maxWidth: '80%',
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     subTitle: {
         fontSize: 16,

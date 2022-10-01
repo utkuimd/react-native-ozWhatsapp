@@ -6,6 +6,10 @@ export default StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
     },
+    allAreas: {
+        height: Dimensions.get('window').height / 2.5,
+        justifyContent: 'space-evenly',
+    },
     titleArea: {
         maxWidth: Dimensions.get('screen').width / 1.25,
         alignItems: 'center',
@@ -15,13 +19,16 @@ export default StyleSheet.create({
         fontSize: 28,
         color: 'orange',
         marginBottom: 7,
+        fontWeight: 'bold',
     },
     desciption: {
         fontSize: 16,
+        textAlign: 'center',
+        color: 'gray',
     },
     pickerArea: {
         width: Dimensions.get('screen').width / 1.25,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     picker: {
         width: '80%',
@@ -59,11 +66,18 @@ export default StyleSheet.create({
         height: '70%',
         justifyContent: 'flex-end',
     },
-    phoneNum: {
-        width: '100%',
+    inputPhoneNum: {
+        width: '90%',
         fontSize: 20,
         marginLeft: 3,
         marginBottom: 1,
+        alignSelf: 'center',
+    },
+    goUserInfo: {
+        fontSize: 16,
+        color: '#1e90ff',
+        textDecorationLine: 'underline',
+        textAlign: 'center',
     },
     continueBtn: {
         width: Dimensions.get('screen').width / 2,
