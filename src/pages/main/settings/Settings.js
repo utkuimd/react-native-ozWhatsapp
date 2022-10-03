@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Alert } from 'react-native';
+import { SafeAreaView, View, Text, Alert, Image, TouchableOpacity } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,12 +9,16 @@ import { setAuthComp } from '../../../utils/slices/authCompSlice';
 import { auth } from '../../../utils/firebase';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from './Home.style';
+import { FontAwesome5 } from '@expo/vector-icons';
+import styles from './Settings.style';
 
-const Home = () => {
+const Settings = () => {
   const userInRedux = useSelector(state => state.user);
   const authComp = useSelector(state => state.authComp);
   const dispatch = useDispatch();
+
+  const profileImage = userInRedux.user.profileImage;
+  const fullName = userInRedux.user.fullName;
 
   const show = async () => {
     if (auth.currentUser) {
@@ -40,11 +44,32 @@ const Home = () => {
   };
   
   return (
-    <View style={{flex: 1, alignItems:'center', justifyContent: 'space-evenly'}}>
-      <Text onPress={show}>SHOW USER</Text>
-      <Text onPress={logOut}>LOGOUT</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+
+      <View style={styles.userArea}>
+        <Image style={styles.profileImage} source={{uri: profileImage}}/>
+        <Text style={styles.fullName}>{fullName}</Text>
+      </View>
+      
+      <View style={styles.buttonArea}>
+        <TouchableOpacity style={styles.button} onPress={show}>
+          <FontAwesome5 name="user-cog" size={27} color="#bdbebd" />
+          <Text style={styles.buttonText}>Edit your profile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={null}>
+          <FontAwesome5 name="sun" size={33} color="#bdbebd" />
+          <Text style={styles.buttonText}>Change Theme</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.logOutBtn} onPress={null}>
+          <FontAwesome5 name="door-open" size={30} color="#ff5232"/>
+          <Text style={styles.logOutBtnText}>Log out...</Text>
+        </TouchableOpacity>
+      </View>
+      
+    </SafeAreaView>
   )
 }
 
-export default Home
+export default Settings;
