@@ -35,11 +35,27 @@ const AppNavigation = () => {
     }, []);
 
     return (
-        <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator>
             { (authComp.authComp) ? ( // If user completed authentication process, show main screens. 
-                <Stack.Screen name='MainScreens' component={MainStackNav} />
+                <Stack.Screen
+                    name='MainScreens'
+                    component={MainStackNav}
+                    options={{
+                        headerTitle: 'ozWhatsapp',
+                        headerTitleAlign: 'center',
+                        headerTitleStyle: { color: 'white', fontSize: 21 },
+                        headerStyle: {
+                            backgroundColor: 'orange',
+                        },
+                        headerShadowVisible: false,
+                    }}
+                />
             ) : (
-                <Stack.Screen name='AuthScreens' component={AuthStackNav} />
+                <Stack.Screen
+                    name='AuthScreens'
+                    component={AuthStackNav}
+                    options={{headerShown: false}}
+                />
             ) }
         </Stack.Navigator>
     )

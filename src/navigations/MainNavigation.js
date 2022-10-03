@@ -1,13 +1,57 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home } from "../pages";
+import React from 'react';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Messages } from '../pages';
+import { Status } from '../pages';
+import { Settings } from '../pages';
 
-const Stack = createNativeStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const MainNavigation = () => {
     return (
-        <Stack.Navigator>
-            <Stack.Screen name='HomeScreen' component={Home}/>
-        </Stack.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+                tabBarStyle: {
+                    backgroundColor: 'orange',
+                },
+                tabBarIndicatorStyle: { backgroundColor: 'white', height: 4 }
+            }}>
+            <Tab.Screen
+                name='MessagesScreen'
+                component={Messages}
+                options={{
+                    tabBarLabel: 'Messages',
+                    tabBarLabelStyle: {
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                    },
+                }}
+            />
+            <Tab.Screen
+                name='StatusScreen'
+                component={Status}
+                options={{
+                    tabBarLabel: 'Status',
+                    tabBarLabelStyle: {
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                    }
+                }}
+            />
+            <Tab.Screen
+                name='SettingsScreen'
+                component={Settings}
+                options={{
+                    tabBarLabel: 'Settings',
+                    tabBarLabelStyle: {
+                        fontWeight: 'bold',
+                        fontSize: 14,
+                        color: 'white',
+                    }
+                }}
+            />
+        </Tab.Navigator>
     )
 }
 
