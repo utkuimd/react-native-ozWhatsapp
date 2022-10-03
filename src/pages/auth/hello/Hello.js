@@ -1,11 +1,13 @@
 import React from 'react';
 import { ImageBackground, View, Text, TouchableOpacity, Image } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+
 import styles from './Hello.style';
 
 const Hello = () => {
   const navigation = useNavigation();
-  
+
   const gotoUserInfo = () => {
     navigation.navigate('GetUserInfoScreen');
   };

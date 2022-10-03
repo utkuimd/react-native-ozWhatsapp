@@ -61,7 +61,7 @@ const GetUserInfo = () => {
   };
 
   const gotoPhone = () => {
-    if ( fullName !== '' && isOnlyLetter(fullName) !== false ) { // Make process if full name not empty and contains only letters.
+    if ( fullName !== '' && isOnlyLetterSpace(fullName) !== false ) { // Make process if full name not empty and contains only letters.
       if ( profileImage !== null ) {
         // If user choose a profile image send this image URL to redux.
         dispatch(updateUser({profileImage}));
@@ -70,14 +70,15 @@ const GetUserInfo = () => {
         dispatch(updateUser({profileImage: 'https://divedigital.id/wp-content/uploads/2022/07/1-Blank-TikTok-Default-PFP.jpg'}))
       }
       dispatch(updateUser({fullName})); // Send user full name to redux.
+      console.log('saved user information');
       navigation.navigate('GetPhoneNumScreen');
     } else {
       Alert.alert('Warning','You must enter your full name and your full name must be only letters.');
     }
   };
 
-  const isOnlyLetter = (str) => {
-    return /^[A-z]*$/.test(str); // Check the string contain only uppercase and lowercase letters.
+  const isOnlyLetterSpace = (str) => {
+    return /^[A-zÖöÇçŞşİĞğÜü ]*$/.test(str); // Check the string contain only uppercase and lowercase letters, spaces and turkish characters.
   };
 
   return (

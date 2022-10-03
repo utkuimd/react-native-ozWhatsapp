@@ -4,7 +4,7 @@ import { ImageBackground, Text, View, TextInput, TouchableOpacity, Alert } from 
 import { Picker } from '@react-native-picker/picker';
 
 import { useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUser } from '../../../utils/slices/userSlice';
 
 import LimConCodes from '../../../LimConCodes.json';
@@ -16,7 +16,6 @@ const GetPhoneNum = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const userInRedux = useSelector(state => state.user);
 
   const isOnlyNumberDash = (str) => {
     return /^[0-9-]*$/.test(str);
@@ -34,7 +33,7 @@ const GetPhoneNum = () => {
           text: 'OK',
           onPress: () => {
             dispatch(updateUser({phoneNumber: fullPN}));
-            console.log(JSON.stringify(userInRedux));
+            console.log('saved user phone number');
             navigation.navigate('VerifyScreen');
           }
         }
