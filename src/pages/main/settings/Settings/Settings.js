@@ -2,20 +2,22 @@ import React from 'react';
 import { SafeAreaView, View, Text, Alert, Image, TouchableOpacity } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
-import { logout } from '../../../utils/slices/userSlice';
-import { setAuthComp } from '../../../utils/slices/authCompSlice';
+import { logout } from '../../../../utils/slices/userSlice';
+import { setAuthComp } from '../../../../utils/slices/authCompSlice';
 
-import { auth } from '../../../utils/firebase';
+import { auth } from '../../../../utils/firebase';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './Settings.style';
 
 const Settings = () => {
-  const userInRedux = useSelector(state => state.user);
   const authComp = useSelector(state => state.authComp);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const userInRedux = useSelector(state => state.user);
 
   const profileImage = userInRedux.user.profileImage;
   const fullName = userInRedux.user.fullName;
@@ -34,13 +36,17 @@ const Settings = () => {
 
   const logOut = async () => { // Log out process doing here for the time being.
     auth.signOut() // Log out from firebase.
-    .then(async () => {  
-      await AsyncStorage.removeItem('user'); // If user can logout from firebase, delete user information in local and redux.
-      dispatch(logout());
+    .then(async () => {
       await AsyncStorage.removeItem('authComp'); // If user can logout from firebase, delete authentication completed information in local and redux.
       dispatch(setAuthComp(null));
+      await AsyncStorage.removeItem('user'); // If user can logout from firebase, delete user information in local and redux.
+      dispatch(logout());
     })
     .catch((err) => {Alert.alert(err.message)});
+  };
+
+  const gotoEdit = () => {
+    navigation.navigate('EditProfileScreen');
   };
   
   return (
@@ -52,17 +58,17 @@ const Settings = () => {
       </View>
       
       <View style={styles.buttonArea}>
-        <TouchableOpacity style={styles.button} onPress={show}>
+        <TouchableOpacity style={styles.button} onPress={gotoEdit}>
           <FontAwesome5 name="user-cog" size={27} color="#bdbebd" />
-          <Text style={styles.buttonText}>Edit your profile</Text>
+          <Text style={styles.buttonText}>Edit Your Profile</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={null}>
+        <TouchableOpacity style={styles.button} onPress={show}>
           <FontAwesome5 name="sun" size={33} color="#bdbebd" />
           <Text style={styles.buttonText}>Change Theme</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.logOutBtn} onPress={null}>
+        <TouchableOpacity style={styles.logOutBtn} onPress={logOut}>
           <FontAwesome5 name="door-open" size={30} color="#ff5232"/>
           <Text style={styles.logOutBtnText}>Log out...</Text>
         </TouchableOpacity>

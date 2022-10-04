@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Messages } from '../pages';
 import { Status } from '../pages';
-import { Settings } from '../pages';
+import SettingsStackNav from './SettingsNavigation';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -40,8 +40,8 @@ const MainNavigation = () => {
                 }}
             />
             <Tab.Screen
-                name='SettingsScreen'
-                component={Settings}
+                name='SettingsScreens'
+                component={SettingsStackNav}
                 options={{
                     tabBarLabel: 'Settings',
                     tabBarLabelStyle: {
