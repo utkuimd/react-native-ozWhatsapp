@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, View, Text, Image, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
+import { ImageBackground, View, Text, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -10,7 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../../../utils/slices/userSlice';
 
-import Entypo from '@expo/vector-icons/Entypo';
+import { ImageLoading } from '../../../components';
+
 import styles from './GetUserInfo.style';
 
 
@@ -78,7 +79,7 @@ const GetUserInfo = () => {
   };
 
   const isOnlyLetterSpace = (str) => {
-    return /^[A-zÖöÇçŞşİĞğÜü ]*$/.test(str); // Check the string contain only uppercase and lowercase letters, spaces and turkish characters.
+    return /^[A-zÖöÇçŞşİıĞğÜü ]*$/.test(str); // Check the string contain only uppercase and lowercase letters, spaces and turkish characters.
   };
 
   return (
@@ -125,20 +126,7 @@ const GetUserInfo = () => {
         <Text style={styles.continueText}>Continue</Text>
       </TouchableOpacity>
 
-      {
-        // Image loading screen, this screen prevents user make process.
-        imageLoading === true ? (
-          <View style={[ StyleSheet.absoluteFill, styles.loadingScreen ]}>
-            <View style={styles.loadingScreenDiv}>
-              <Text style={styles.loadingScreenText}>Please Wait...</Text>
-              <Entypo name="rocket" size={40} color="orange"/>
-            </View>
-          </View>
-        ) : (
-          // If user does not uploading any picture, do not render anything.
-          <View style={{display: 'none'}}/>
-        )
-      }
+      <ImageLoading loading={imageLoading}/>
 
     </ImageBackground>
   )
