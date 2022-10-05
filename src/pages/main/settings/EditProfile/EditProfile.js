@@ -24,6 +24,7 @@ const EditProfile = () => {
   const [ imageLoading, setImageLoading ] = useState(false);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const { theme } = useSelector(state => state.theme);
   const userInRedux = useSelector(state => state.user);
 
   const profileImage = userInRedux.user.profileImage;
@@ -36,12 +37,15 @@ const EditProfile = () => {
 
   const saveChanges = () => {
     if ( fullNameState !== '' && isOnlyLetterSpace(fullNameState) ) {
+      // First update user information in firebase.
       updateProfile(auth.currentUser, {
         displayName: fullNameState,
         photoURL: profileImageState
       }).then(() => {
-        dispatch(updateUser({profileImage: profileImageState}));
+        // Then, update user information in redux.
+        dispatch(updateUser({profileImage: profileImageState})); 
         dispatch(updateUser({fullName: fullNameState}));
+        // Update user information in local storage.
         AsyncStorage.setItem('user', JSON.stringify({"user": {"fullName": fullNameState, "phoneNumber": phoneNumber, "profileImage": profileImageState}}));
         navigation.goBack();
         console.log('OK');
@@ -95,13 +99,13 @@ const EditProfile = () => {
     return await getDownloadURL(fileRef);
   };
 
-  useEffect(() => {
+  useEffect(() => { // When the page is first loaded, get old user data(profileImage and fullName) and show.
     setProfileImageState(profileImage);
     setFullNameState(fullName);
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
 
       <View style={styles.userDetailsArea}>
         <TouchableOpacity onPress={pickImage}>
@@ -116,9 +120,9 @@ const EditProfile = () => {
               maxLength={30}
               onChangeText={setFullNameState}
               value={fullNameState}
-              style={styles.fullName}
+              style={[styles.fullName, {color: theme.color}]}
             />
-            <Text style={styles.remainLetter}>{30 - fullNameState.length}</Text>
+            <Text style={[styles.remainLetter, {color: theme.color}]}>{30 - fullNameState.length}</Text>
           </View>
           <View style={styles.underline}/>
         </View>
@@ -130,12 +134,12 @@ const EditProfile = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.dontSaveBtn} onPress={goBack}>
-          <Text style={styles.dontSaveText}>Don't Save, Go Back</Text>
+          <Text style={[styles.dontSaveText, {color: theme.color}]}>Don't Save, Go Back</Text>
         </TouchableOpacity>
       </View>
-
+      {/* When profile image is loading, prevent user make some process.
+      Example: User can travel between top tabs but can't make anything on this page. */}
       <ImageLoading loading={imageLoading} />
-
     </SafeAreaView>
   )
 }

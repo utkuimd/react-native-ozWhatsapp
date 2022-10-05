@@ -1,17 +1,18 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Messages } from '../pages';
-import { Status } from '../pages';
+import { Messages, Status } from '../pages';
 import SettingsStackNav from './SettingsNavigation';
+import { useSelector } from 'react-redux';
 
 const Tab = createMaterialTopTabNavigator();
 
 const MainNavigation = () => {
+    const { theme } = useSelector(state => state.theme);
     return (
         <Tab.Navigator
             screenOptions={{
                 tabBarStyle: {
-                    backgroundColor: 'orange',
+                    backgroundColor: theme.headerColor,
                 },
                 tabBarIndicatorStyle: { backgroundColor: 'white', height: 4 }
             }}>

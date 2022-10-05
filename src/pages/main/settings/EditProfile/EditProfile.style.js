@@ -64,7 +64,6 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     dontSaveText: {
-        color: 'gray',
         fontSize: 18,
     },
 

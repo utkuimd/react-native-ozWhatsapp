@@ -1,11 +1,12 @@
-import React from 'react';
-import { SafeAreaView, View, Text, Alert, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, Alert, Image, TouchableOpacity, Switch } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { logout } from '../../../../utils/slices/userSlice';
 import { setAuthComp } from '../../../../utils/slices/authCompSlice';
+import { toggleTheme } from '../../../../utils/slices/themeSlice';
 
 import { auth } from '../../../../utils/firebase';
 
@@ -14,9 +15,11 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './Settings.style';
 
 const Settings = () => {
-  const authComp = useSelector(state => state.authComp);
+  const [ handleTheme, setHandleTheme ] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const authComp = useSelector(state => state.authComp);
+  const { theme } = useSelector(state => state.theme);
   const userInRedux = useSelector(state => state.user);
 
   const profileImage = userInRedux.user.profileImage;
@@ -32,6 +35,7 @@ const Settings = () => {
     console.log(userInLocal);
     console.log(userInRedux);
     console.log(authComp);
+    console.log(theme.type);
   };
 
   const logOut = async () => { // Log out process doing here for the time being.
@@ -49,12 +53,17 @@ const Settings = () => {
     navigation.navigate('EditProfileScreen');
   };
   
+  const changeTheme = () => {
+    setHandleTheme(!handleTheme);
+    dispatch(toggleTheme());
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
 
       <View style={styles.userArea}>
         <Image style={styles.profileImage} source={{uri: profileImage}}/>
-        <Text style={styles.fullName}>{fullName}</Text>
+        <Text style={[styles.fullName, {color: theme.color}]} onPress={show}>{fullName}</Text>
       </View>
       
       <View style={styles.buttonArea}>
@@ -63,9 +72,16 @@ const Settings = () => {
           <Text style={styles.buttonText}>Edit Your Profile</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={show}>
+        <TouchableOpacity style={styles.button} onPress={changeTheme}>
           <FontAwesome5 name="sun" size={33} color="#bdbebd" />
           <Text style={styles.buttonText}>Change Theme</Text>
+          <Switch
+            trackColor={{ false: '#bdbebd', true: 'crimson' }}
+            thumbColor='white'
+            ios_backgroundColor='#3e3e3e'
+            onValueChange={changeTheme}
+            value={handleTheme}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.logOutBtn} onPress={logOut}>

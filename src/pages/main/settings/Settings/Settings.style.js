@@ -19,7 +19,6 @@ export default StyleSheet.create({
         maxWidth: Dimensions.get('screen').width / 1.25,
         fontSize: 22,
         fontWeight: 'bold',
-        color: 'gray',
         textAlign: 'center',
     },
     buttonArea: {
@@ -38,6 +37,7 @@ export default StyleSheet.create({
         fontSize: 18,
         color: 'gray',
         marginLeft: '10%',
+        marginRight: '25%',
     },
     logOutBtn: {
         flexDirection: 'row',
