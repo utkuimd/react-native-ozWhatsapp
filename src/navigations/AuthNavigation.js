@@ -1,8 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Hello } from "../pages";
-import { GetUserInfo } from "../pages";
-import { GetPhoneNum } from "../pages";
-import { Verify } from "../pages";
+import { Hello, GetUserInfo, GetPhoneNum, Verify } from "../pages";
 
 const Stack = createNativeStackNavigator();
 

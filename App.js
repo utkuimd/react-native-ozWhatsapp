@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <StatusBar style='auto' />
+        <StatusBar style='light' />
         <AppNavigation />
       </NavigationContainer>
     </Provider>

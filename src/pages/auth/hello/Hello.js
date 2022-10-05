@@ -3,13 +3,31 @@ import { ImageBackground, View, Text, TouchableOpacity, Image } from 'react-nati
 
 import { useNavigation } from '@react-navigation/native';
 
+import { auth } from '../../../utils/firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
+
 import styles from './Hello.style';
 
 const Hello = () => {
   const navigation = useNavigation();
+  const userInRedux = useSelector(state => state.user);
+  const authComp = useSelector(state => state.authComp);
 
   const gotoUserInfo = () => {
     navigation.navigate('GetUserInfoScreen');
+  };
+
+  const show = async () => {
+    if (auth.currentUser) {
+      console.log(auth.currentUser.displayName, auth.currentUser.photoURL, auth.currentUser.phoneNumber);
+    } else {
+      console.log('User sign out!');
+    }
+    const userInLocal = await AsyncStorage.getItem('user');
+    console.log(userInLocal);
+    console.log(userInRedux);
+    console.log(authComp);
   };
 
   return (
@@ -25,7 +43,7 @@ const Hello = () => {
 
       <View style={styles.developer}>
         <Text>from</Text>
-        <Text style={styles.devText}>github.com/utkuimd</Text>
+        <Text style={styles.devText} onPress={show}>github.com/utkuimd</Text>
       </View>
 
     </ImageBackground>
