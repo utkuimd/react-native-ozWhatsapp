@@ -4,6 +4,7 @@ import { authCompSlice } from "./slices/authCompSlice";
 import { themeSlice } from './slices/themeSlice';
 import { contactListSlice } from "./slices/contactListSlice";
 import { chosenContactSlice } from "./slices/chosenContactSlice";
+import { messagesSlice } from "./slices/messagesSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
         theme: themeSlice.reducer,
         contactList: contactListSlice.reducer,
         chosenContact: chosenContactSlice.reducer,
+        messages: messagesSlice.reducer,
     },
 });
