@@ -24,6 +24,7 @@ const Settings = () => {
 
   const profileImage = userInRedux.user.profileImage;
   const fullName = userInRedux.user.fullName;
+  const phoneNumber = userInRedux.user.phoneNumber;
 
   const show = async () => {
     if (auth.currentUser) {
@@ -62,8 +63,9 @@ const Settings = () => {
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
 
       <View style={styles.userArea}>
-        <Image style={styles.profileImage} source={{uri: profileImage}}/>
-        <Text style={[styles.fullName, {color: theme.color}]} onPress={show}>{fullName}</Text>
+        <Image style={styles.profileImage} source={{uri: profileImage}} onPress={show}/>
+        <Text style={[styles.text, {color: theme.color}]}>{fullName}</Text>
+        <Text style={[styles.text, {color: theme.color}]}>{phoneNumber}</Text>
       </View>
       
       <View style={styles.buttonArea}>
@@ -84,9 +86,9 @@ const Settings = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.logOutBtn} onPress={logOut}>
+        <TouchableOpacity style={styles.logoutButton} onPress={logOut}>
           <FontAwesome5 name="door-open" size={30} color="#ff5232"/>
-          <Text style={styles.logOutBtnText}>Log out...</Text>
+          <Text style={styles.logoutText}>Log out...</Text>
         </TouchableOpacity>
       </View>
       

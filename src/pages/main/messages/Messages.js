@@ -15,7 +15,7 @@ const Messages = () => {
   
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
-      <TouchableOpacity style={[styles.newMessage, {backgroundColor: theme.headerColor}]} onPress={gotoContacts}>
+      <TouchableOpacity style={[styles.newMessage, {backgroundColor: theme.divColor}]} onPress={gotoContacts}>
         <Entypo name="new-message" size={28} color="white" />
       </TouchableOpacity>
     </SafeAreaView>
