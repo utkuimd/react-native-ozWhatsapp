@@ -38,7 +38,7 @@ export default StyleSheet.create({
         fontSize: 18,
         color: 'gray',
         marginLeft: '10%',
-        marginRight: '25%',
+        marginRight: '20%'
     },
     logoutButton: {
         flexDirection: 'row',

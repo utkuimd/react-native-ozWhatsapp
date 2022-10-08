@@ -63,9 +63,9 @@ const Settings = () => {
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
 
       <View style={styles.userArea}>
-        <Image style={styles.profileImage} source={{uri: profileImage}} onPress={show}/>
+        <Image style={styles.profileImage} source={{uri: profileImage}}/>
         <Text style={[styles.text, {color: theme.color}]}>{fullName}</Text>
-        <Text style={[styles.text, {color: theme.color}]}>{phoneNumber}</Text>
+        <Text onPress={show} style={[styles.text, {color: theme.color}]}>{phoneNumber}</Text>
       </View>
       
       <View style={styles.buttonArea}>

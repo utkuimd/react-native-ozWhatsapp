@@ -12,7 +12,6 @@ const Contacts = ({contact}) => {
 
   const gotoMessageScreen = () => {
     dispatch(updateContact(contact)); // Contact chosen and write contact information to redux.
-    navigation.pop(); // Preventing to back to contact list screen thus user will direct to messages screen.
     navigation.navigate('MessageScreen'); // Go to personel message screen.
   };
 

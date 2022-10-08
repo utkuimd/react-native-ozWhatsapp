@@ -9,19 +9,20 @@ export default StyleSheet.create({
         paddingHorizontal: 20,
     },
     image: {
-        width: Dimensions.get('screen').width / 8,
-        height: Dimensions.get('screen').width / 8,
-        borderRadius: Dimensions.get('screen').width / 16,
+        width: Dimensions.get('screen').width / 6,
+        height: Dimensions.get('screen').width / 6,
+        borderRadius: Dimensions.get('screen').width / 12,
     },
     details: {
         flex: 1,
         marginLeft: 15,
     },
     pN: {
-        fontSize: 17,
+        fontSize: 19,
         fontWeight: 'bold'
     },
     about: {
         color: 'gray',
+        fontSize: 16
     },
 })
