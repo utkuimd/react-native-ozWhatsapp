@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, ImageBackground, FlatList } from 'react-native';
+import { View, Text, TextInput, ImageBackground, FlatList, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { setMessages } from '../../../utils/slices/messagesSlice';
 import { collection, addDoc, serverTimestamp, query, where, getDocs, orderBy, Timestamp } from "firebase/firestore";
@@ -7,6 +7,7 @@ import { db } from '../../../utils/firebase';
 import { Message } from '../../../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import * as Location from 'expo-location';
 import styles from './MessageScreen.style';
 
 const MessageScreen = () => {
@@ -22,7 +23,7 @@ const MessageScreen = () => {
   // Get messages between these two users and order messages by creation date.
   const q = query(collection(db, "messages"), where("users", "in", [[phoneNumberS, phoneNumberR], [phoneNumberR, phoneNumberS]]), orderBy("date", "asc") );
 
-  const sendMessage = async () => {
+  const sendText = async () => {
     setMessageText('');
     await addDoc(collection(db, "messages"), { // Add message to "messages" collection.
       type: 'text',
@@ -32,9 +33,31 @@ const MessageScreen = () => {
       date: serverTimestamp(),
       users: [phoneNumberS, phoneNumberR]
     });
-    console.log('sending message is success');
+    console.log('sending text is success');
     getAllMessages(); // After sending message, you can see your message on the screen immediately through calling this function.
   };
+
+  const sendMap = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if(status !== 'granted') {
+      Alert.alert('Permission not granted!');
+      return;
+    } else {
+      const _location = await Location.getCurrentPositionAsync({});
+      console.log(JSON.stringify(_location));
+      await addDoc(collection(db, "messages"), { // Add message to "messages" collection.
+        type: 'location',
+        longitude: _location.coords.longitude,
+        latitude: _location.coords.latitude,
+        senderID: phoneNumberS,
+        receiverID: phoneNumberR,
+        date: serverTimestamp(),
+        users: [phoneNumberS, phoneNumberR]
+      });
+      console.log('sending text is success');
+      getAllMessages(); // After sending message, you can see your message on the screen immediately through calling this function.
+    }
+  }
 
   const getAllMessages = async () => {
     const querySnapshot = await getDocs(q); // Get all messages that matching query above.
@@ -47,6 +70,8 @@ const MessageScreen = () => {
       const neededData = {
         type: message.data().type,
         text: message.data().text,
+        longitude: message.data().longitude,
+        latitude: message.data().latitude,
         senderID: message.data().senderID,
         receiverID: message.data().receiverID,
         date: date
@@ -59,7 +84,7 @@ const MessageScreen = () => {
 
   const show = () => {
     console.log('-------------------------------------------------------------------');
-    console.log(JSON.stringify(messages));
+    console.log(messages);
   };
 
   useEffect(() => {
@@ -79,8 +104,8 @@ const MessageScreen = () => {
       />
 
       <View style={[styles.sendingArea, {backgroundColor: theme.headerColor}]}>
-        <MaterialCommunityIcons name="map-marker-radius-outline" size={30} color="#949494" />
-        <View style={[styles.sendMessage, {backgroundColor: theme.textInputColor}]}>
+        <MaterialCommunityIcons name="map-marker-radius-outline" size={30} color="#949494" onPress={sendMap}/>
+        <View style={[styles.sendText, {backgroundColor: theme.textInputColor}]}>
           <TextInput
             style={[styles.textInput, {color: theme.color}]}
             placeholder="Message"
@@ -94,7 +119,7 @@ const MessageScreen = () => {
           name="send"
           size={30}
           color="#949494"
-          onPress={messageText !== '' ? sendMessage : null}
+          onPress={messageText !== '' ? sendText : null}
           style={messageText !== '' ? {opacity: 1} : {opacity: 0.2}}
         />
       </View>

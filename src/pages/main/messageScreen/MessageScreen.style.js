@@ -12,7 +12,7 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 15
       },
-      sendMessage: {
+      sendText: {
         flex: 1,
         height: '70%',
         borderRadius: 20,

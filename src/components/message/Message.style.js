@@ -8,7 +8,7 @@ export default StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 15,
         borderRadius: 10,
-        alignSelf: 'flex-end'
+        alignSelf: 'flex-end',
     },
     receivedMessage:{
         maxWidth: Dimensions.get('screen').width / 1.4,
@@ -22,12 +22,13 @@ export default StyleSheet.create({
     text: {
         fontSize: 18
     },
-    sDate: {
+    date: {
         fontSize: 13,
         alignSelf: 'flex-end',
     },
-    rDate: {
-        fontSize: 13,
-        alignSelf: 'flex-start',
-    }
+    map: {
+        width: Dimensions.get('screen').width / 2,
+        height: Dimensions.get('window').height / 5,
+        marginBottom: 4,
+    },
 })
