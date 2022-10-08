@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthStackNav from './AuthNavigation';
 import MainStackNav from './MainNavigation';
-import { ContactList, MessageScreen } from '../pages';
+import { ContactList, MessageScreen, Map } from '../pages';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../utils/slices/userSlice';
@@ -24,6 +24,7 @@ const AppNavigation = () => {
         const userInLocal = await AsyncStorage.getItem('user');
         const isUser = userInLocal ? JSON.parse(userInLocal).user : null;
         dispatch(updateUser(isUser));
+        setTimeout(() => {}, 2000);
     };
 
     const isAuthCompleted = async () => { // Write authentication completed information to redux from local.
@@ -34,8 +35,8 @@ const AppNavigation = () => {
     };
 
     useEffect(() => { // When app first loaded,
-        isAuthCompleted(); // Get authentication completed information.
         getUser(); // Get user information.
+        isAuthCompleted(); // Get authentication completed information.
     }, []);
 
     return (
@@ -89,6 +90,11 @@ const AppNavigation = () => {
                         />
                     ),
                 }}
+            />
+            <Stack.Screen
+                name='MapScreen'
+                component={Map}
+                options={{headerShown: false}}
             />
         </Stack.Navigator>
     )
