@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, Text, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../../utils/firebase';
@@ -29,19 +29,16 @@ const ContactList = () => {
     console.log('Contact list taken');
   }, []);
 
-  const show = () => {
-    console.log(JSON.stringify(contactList));
-  };
-
   const renderContacts = ({item}) => <Contacts contact={item}/>
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
-      <Text onPress={show}>SHOW CONTACT LIST IN REDUX</Text>
+
       <FlatList
         data={contactList.contactList}
         renderItem={renderContacts}
       />
+
     </SafeAreaView>
   )
 }

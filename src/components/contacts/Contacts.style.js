@@ -18,11 +18,10 @@ export default StyleSheet.create({
         marginLeft: 15,
     },
     pN: {
-        fontSize: 19,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     about: {
         color: 'gray',
-        fontSize: 16
     },
 })

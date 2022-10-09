@@ -6,7 +6,6 @@ import { collection, addDoc, serverTimestamp, query, where, getDocs, orderBy, Ti
 import { db } from '../../../utils/firebase';
 import { Message } from '../../../components';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import styles from './MessageScreen.style';
 
@@ -82,11 +81,6 @@ const MessageScreen = () => {
     console.log('getting all messages is success')
   };
 
-  const show = () => {
-    console.log('-------------------------------------------------------------------');
-    console.log(messages);
-  };
-
   useEffect(() => {
     getAllMessages()
   }, []);
@@ -96,11 +90,10 @@ const MessageScreen = () => {
   return (
     <ImageBackground style={styles.container} source={{uri: theme.backgroundImage}}>
 
-      <Text onPress={show}>SHOW ALL MESSAGE FROM REDUX</Text>
-
       <FlatList 
         data={messages.messages}
         renderItem={renderMessages}
+        style={styles.list}
       />
 
       <View style={[styles.sendingArea, {backgroundColor: theme.headerColor}]}>
@@ -113,7 +106,6 @@ const MessageScreen = () => {
             value={messageText}
             onChangeText={setMessageText}
           />
-          <AntDesign name="paperclip" size={30} color="#949494" />
         </View>
         <MaterialCommunityIcons
           name="send"

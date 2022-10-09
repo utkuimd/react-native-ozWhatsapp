@@ -26,4 +26,7 @@ export default StyleSheet.create({
         maxWidth: '80%',
         fontSize: 16
       },
+      list: {
+        marginVertical: 10
+      }
 })
