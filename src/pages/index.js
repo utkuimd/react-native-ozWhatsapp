@@ -7,5 +7,6 @@ export { default as ContactList } from './main/contactList/ContactList';
 export { default as Map } from './main/map/Map';
 export { default as MessageScreen } from './main/messageScreen/MessageScreen';
 export { default as Status } from './main/status/Status';
+export { default as OpenStatus } from './main/openStatus/OpenStatus';
 export { default as Settings } from './main/settings/Settings/Settings';
 export { default as EditProfile } from './main/settings/EditProfile/EditProfile';

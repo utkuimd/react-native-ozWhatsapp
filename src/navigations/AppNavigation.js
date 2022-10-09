@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthStackNav from './AuthNavigation';
 import MainStackNav from './MainNavigation';
-import { ContactList, MessageScreen, Map } from '../pages';
+import { ContactList, MessageScreen, Map, OpenStatus } from '../pages';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../utils/slices/userSlice';
@@ -94,6 +94,11 @@ const AppNavigation = () => {
             <Stack.Screen
                 name='MapScreen'
                 component={Map}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name='OpenStatusScreen'
+                component={OpenStatus}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
