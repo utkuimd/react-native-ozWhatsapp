@@ -6,9 +6,18 @@
 + After the authentication process, user will direct to main screens. In main screens:
 + User can message other users in the contact list and can share him/her location.
 + User can update him/her status and can see own or other users status.
-+ User can edit him/her profile, change theme and logout.
++ User can edit him/her profile, change theme and logout.<br>
++ **Important note:**<br>
+!!! You can use these phone numbers and verfication code for testing.
++90 111-111-1111 -> 111111,
++90 222-222-2222 -> 222222,
++90 333-333-3333 -> 333333,
++90 444-444-4444 -> 444444,
++1 555-555-5555 -> 555555,
++90 666-666-6666 -> 666666.<br>
 
 ***PRESENTATION VIDEO OF MY PROJECT*** :<br>
+[![ozWhatsapp](https://i.ytimg.com/vi/jITPurxuS3U/hqdefault.jpg)](https://www.youtube.com/watch?v=jITPurxuS3U)
 
 ***REQUIRED*** :<br>
 **Rules**:<br>
