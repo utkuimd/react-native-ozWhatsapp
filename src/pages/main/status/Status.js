@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../../utils/firebase';
@@ -18,6 +19,7 @@ const Status = () => {
   const allStatus = useSelector(state => state.allStatus);
   const [ statusLoading, setStatusLoading ] = useState(false);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   const phoneNumber = userInRedux.user.phoneNumber;
   const dateNowMS = new Date().getTime();
@@ -91,7 +93,7 @@ const Status = () => {
  
   useEffect (() => {
     getStatus();
-  }, []);
+  }, [isFocused]);
 
   const renderStatus = ({item}) => <Statuss status={item}/>
   const separatorHeader = () => <View style={[styles.separatorHeader, {borderColor: theme.divColor}]}/>

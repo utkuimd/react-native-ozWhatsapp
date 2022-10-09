@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { SafeAreaView, View, TouchableOpacity, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../utils/firebase';
 import { Contacts } from '../../../components';
@@ -13,6 +14,7 @@ const Messages = () => {
   const { theme } = useSelector(state => state.theme);
   const userInRedux = useSelector(state => state.user);
   const [ contacts, setContacts ] = useState([]);
+  const isFocused = useIsFocused();
 
   const phoneNumber = userInRedux.user.phoneNumber;
   // Get messages including user
@@ -51,7 +53,7 @@ const Messages = () => {
 
   useEffect(() => {
     contactsDidYouMessage()
-  }, []);
+  }, [isFocused]);
 
   const renderContacts = ({item}) => <Contacts contact={item} />
   const separator = () => <View style={styles.separator}/>
@@ -63,7 +65,6 @@ const Messages = () => {
         data={contacts}
         renderItem={renderContacts}
         ItemSeparatorComponent={separator}
-        ListFooterComponent={separator}
         style={styles.list}
       />
 
